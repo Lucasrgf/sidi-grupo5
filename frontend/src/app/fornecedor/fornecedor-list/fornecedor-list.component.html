@@ -1,0 +1,37 @@
+<div class="container">
+    <button mat-raised-button color="accent" class="addButton" (click)="addFornecedor()">
+        Adicionar
+    </button> 
+    <table mat-table [dataSource]="fornecedores" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let fornecedor"> {{fornecedor.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="cnpj-cpf">
+            <th mat-header-cell *matHeaderCellDef> CNPJ/CPF </th>
+            <td mat-cell *matCellDef="let fornecedor"> {{fornecedor.cnpj_cpf}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let fornecedor"> {{fornecedor.nome_fantasia}} </td>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Edit </th>
+            <td mat-cell *matCellDef="let fornecedor">
+                <button mat-icon-button (click)="editFornecedor(fornecedor.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let fornecedor">
+                <button mat-icon-button (click)="deleteFornecedor(fornecedor)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

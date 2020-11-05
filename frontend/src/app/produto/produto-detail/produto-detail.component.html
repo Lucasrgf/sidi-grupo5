@@ -1,0 +1,39 @@
+<div class="container">
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Código</mat-label>
+      <input matInput [(ngModel)]="produto.codigo" [disabled]="isUpdate">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="produto.nome">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Valor</mat-label>
+      <input matInput [(ngModel)]="produto.valor">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Categoria</mat-label>
+      <mat-select [(ngModel)]="produto.categoria">
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+          {{categoria.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Fornecedor</mat-label>
+      <mat-select [(ngModel)]="produto.fornecedor">
+        <mat-option *ngFor="let fornecedor of fornecedores" [value]="fornecedor">
+          {{fornecedor.nome_fantasia}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-checkbox class="checkbox-margin" [(ngModel)]="produto.ativo">Ativo</mat-checkbox>
+    <br>
+    <button mat-raised-button color="accent" (click)="clickedButton()">{{isUpdate ? 'Atualizar' : 'Adicionar'}}</button>
+    <button mat-raised-button (click)="back()">Voltar</button>
+  </div>

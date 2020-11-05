@@ -1,0 +1,21 @@
+<div class="container">
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="vendedor.nome">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>Login</mat-label>
+    <input matInput [(ngModel)]="vendedor.login">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>Senha</mat-label>
+    <input type="password" matInput [(ngModel)]="vendedor.senha">
+  </mat-form-field>
+  <br>
+  <mat-checkbox class="checkbox-margin" [(ngModel)]="vendedor.ativo">Ativo</mat-checkbox>
+  <br>
+  <button mat-raised-button color="accent" (click)="clickedButton()">{{isUpdate ? 'Atualizar' : 'Adicionar'}}</button>
+  <button mat-raised-button (click)="back()">Voltar</button>
+</div>

@@ -1,0 +1,4 @@
+core/__pycache__
+core/migrations/__pycache__
+rei_do_cangaco/__pycache__
+db.sqlite3

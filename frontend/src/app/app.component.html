@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="opened = !opened">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Rei do Cangaço</span>
+  <span class="spacer"></span>
+  <span class="accountName">{{account.name}}</span>
+  <button mat-icon-button [matMenuTriggerFor]="accountMenu">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #accountMenu>
+    <button mat-menu-item>Configuração</button>
+    <button mat-menu-item>Sair</button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <mat-nav-list>
+      <a mat-list-item href="/vendedor">Vendedor</a>
+      <a mat-list-item href="/produto">Produto</a>
+      <a mat-list-item href="/fornecedor">Fornecedor</a>
+      <a mat-list-item href="/categoria">Categoria</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
