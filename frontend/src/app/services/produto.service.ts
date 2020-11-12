@@ -9,24 +9,31 @@ import { ProdutoModel } from '../models/produto.model';
 })
 export class ProdutoService {
   baseUrl = 'http://localhost:8000/';
-  headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
 
   public getAllProdutos(): Observable<ProdutoModel[]> {
-    return this.http.get<ProdutoModel[]>(`${this.baseUrl}produtos`, { headers: this.headers });
+    return this.http.get<ProdutoModel[]>(`${this.baseUrl}produtos`);
   }
 
   public getProduto(id: string): Observable<ProdutoModel> {
-    return this.http.get<ProdutoModel>(`${this.baseUrl}produtos/${id}`, { headers: this.headers });
+    return this.http.get<ProdutoModel>(`${this.baseUrl}produtos/${id}`);
   }
 
   public deleteProduto(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}produtos/${id}`, { headers: this.headers });
+    return this.http.delete(`${this.baseUrl}produtos/${id}`);
   }
 
   public updateProduto(produto: ProdutoModel): Observable<any> {
-    return this.http.put(`${this.baseUrl}produtos/${produto.id}/`, produto, { headers: this.headers });
+    let body = {
+      "codigo": produto.codigo,
+      "nome": produto.nome,
+      "valor": produto.valor,
+      "categoria": produto.categoria.id,
+      "fornecedor": produto.fornecedor.id,
+      "ativo": produto.ativo
+    }
+    return this.http.put(`${this.baseUrl}produtos/${produto.id}/`, body);
   }
 
   public addProduto(produto: ProdutoModel): Observable<any> {
@@ -34,20 +41,14 @@ export class ProdutoService {
       "codigo": produto.codigo,
       "nome": produto.nome,
       "valor": produto.valor,
-      "categoria": {
-          "nome": produto.categoria.nome
-      },
-      "fornecedor": {
-          "cnpj_cpf": produto.fornecedor.cnpj_cpf,
-          "nome_fantasia": produto.fornecedor.nome_fantasia,
-          "ativo": produto.fornecedor.ativo
-      },
+      "categoria": produto.categoria.id,
+      "fornecedor": produto.fornecedor.id,
       "ativo": produto.ativo
-  }
-    return this.http.post(`${this.baseUrl}produtos/`, body, { headers: this.headers });
+    }
+    return this.http.post(`${this.baseUrl}produtos/`, body);
   }
 
-  public getCategorias(): Observable<CategoriaModel[]>{
-    return this.http.get<CategoriaModel[]>(`${this.baseUrl}categorias`, { headers: this.headers });
+  public getCategorias(): Observable<CategoriaModel[]> {
+    return this.http.get<CategoriaModel[]>(`${this.baseUrl}categorias`);
   }
 }

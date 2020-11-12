@@ -1,7 +1,8 @@
 export class VendedorModel{
     id: number;
     nome: string;
-    login: string;
-    senha: string; 
+    username: string;
+    password: string; 
     ativo: boolean; 
+    email: string;
 }

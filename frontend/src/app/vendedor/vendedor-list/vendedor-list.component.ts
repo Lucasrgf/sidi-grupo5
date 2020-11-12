@@ -13,7 +13,7 @@ import { DeleteDialogComponent } from 'src/app/shared/delete-dialog/delete-dialo
 export class VendedorListComponent implements OnInit {
 
   vendedores: VendedorModel[] = [];
-  displayedColumns: string[] = ['id', 'nome', 'login', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'username', 'email', 'edit', 'delete'];
 
   constructor(
     private api: VendedorService,

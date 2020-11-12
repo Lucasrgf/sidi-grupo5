@@ -1,1 +1,14 @@
-<p>categoria-detail works!</p>
+<div class="container">
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="categoria.id" disabled>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="categoria.nome">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="accent" (click)="clickedButton()">{{isUpdate ? 'Atualizar' : 'Adicionar'}}</button>
+    <button mat-raised-button (click)="back()">Voltar</button>
+  </div>

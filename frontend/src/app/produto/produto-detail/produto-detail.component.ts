@@ -23,9 +23,10 @@ export class ProdutoDetailComponent implements OnInit {
   constructor(private api: ProdutoService, private fornecedoresApi: FornecedorService, private route: ActivatedRoute, private location: Location, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.loadCategorias();
+    this.loadFornecedores();
     this.route.paramMap.subscribe((param: ParamMap) => {
       let id = param.get('id');
-      console.log(id);
       if (id == 'novo') {
         this.isUpdate = false;
       } else {
@@ -33,8 +34,7 @@ export class ProdutoDetailComponent implements OnInit {
         this.loadProduto(id);
       }
     })
-    this.loadCategorias();
-    this.loadFornecedores();
+   
   }
 
   loadCategorias(){
@@ -56,6 +56,13 @@ export class ProdutoDetailComponent implements OnInit {
   loadProduto(id: string) {
     this.api.getProduto(id).subscribe(data => {
       this.produto = data;
+      console.log(this.categorias);
+      // this.produto.categoria = this.categorias.find(c => c.id == data.categoria.id);
+      this.produto.categoria = {
+        id: 1,
+        nome: "Teste"
+      }
+      console.log(this.produto);
     }, err => {
       console.error(err);
     });

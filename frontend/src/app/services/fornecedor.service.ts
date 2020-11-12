@@ -11,27 +11,26 @@ export class FornecedorService {
 
   
   baseUrl = 'http://localhost:8000/';
-  headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
 
   public getAllFornecedores(): Observable<FornecedorModel[]> {
-    return this.http.get<FornecedorModel[]>(`${this.baseUrl}fornecedores`, { headers: this.headers });
+    return this.http.get<FornecedorModel[]>(`${this.baseUrl}fornecedores`);
   }
 
   public getFornecedor(id: string): Observable<FornecedorModel> {
-    return this.http.get<FornecedorModel>(`${this.baseUrl}fornecedores/${id}`, { headers: this.headers });
+    return this.http.get<FornecedorModel>(`${this.baseUrl}fornecedores/${id}`);
   }
 
   public deleteFornecedor(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}fornecedores/${id}`, { headers: this.headers });
+    return this.http.delete(`${this.baseUrl}fornecedores/${id}`);
   }
 
-  public updateFornecedor(vendedor: FornecedorModel): Observable<any> {
-    return this.http.put(`${this.baseUrl}fornecedores/${vendedor.id}/`, vendedor, { headers: this.headers });
+  public updateFornecedor(fornecedor: FornecedorModel): Observable<any> {
+    return this.http.put(`${this.baseUrl}fornecedores/${fornecedor.id}/`, fornecedor);
   }
 
-  public addFornecedor(vendedor: FornecedorModel): Observable<any> {
-    return this.http.post(`${this.baseUrl}fornecedores/`, vendedor, { headers: this.headers });
+  public addFornecedor(fornecedor: FornecedorModel): Observable<any> {
+    return this.http.post(`${this.baseUrl}fornecedores/`, fornecedor);
   }
 }

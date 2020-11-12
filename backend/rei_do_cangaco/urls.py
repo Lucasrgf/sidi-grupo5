@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from core.views import UserViewSet, GroupViewSet, CategoriaViewSet, VendedorViewSet, FormaPagamentoViewSet, PedidoViewSet, ProdutoViewSet, FornecedorViewSet
+from rest_framework.authtoken import views
+from core.views import UserViewSet, GroupViewSet, CategoriaViewSet, FormaPagamentoViewSet, PedidoViewSet, ProdutoViewSet, FornecedorViewSet, login
 
 router = routers.DefaultRouter()
-router.register(r'vendedores', VendedorViewSet, basename='vendedor')
+router.register(r'vendedores', UserViewSet)
 router.register(r'forma-pagamento', FormaPagamentoViewSet)
 router.register(r'pedidos', PedidoViewSet)
 router.register(r'produtos', ProdutoViewSet)
@@ -29,5 +30,7 @@ router.register(r'categorias', CategoriaViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
+    path('api/login', login),
+    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

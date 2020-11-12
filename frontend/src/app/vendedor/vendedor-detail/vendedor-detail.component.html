@@ -6,12 +6,17 @@
   <br>
   <mat-form-field appearance="fill" floatLabel="always">
     <mat-label>Login</mat-label>
-    <input matInput [(ngModel)]="vendedor.login">
+    <input matInput [(ngModel)]="vendedor.username">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="vendedor.email">
   </mat-form-field>
   <br>
   <mat-form-field appearance="fill" floatLabel="always">
     <mat-label>Senha</mat-label>
-    <input type="password" matInput [(ngModel)]="vendedor.senha">
+    <input type="password" matInput [(ngModel)]="vendedor.password">
   </mat-form-field>
   <br>
   <mat-checkbox class="checkbox-margin" [(ngModel)]="vendedor.ativo">Ativo</mat-checkbox>
