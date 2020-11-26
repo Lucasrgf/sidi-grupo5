@@ -1,28 +1,26 @@
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK
+)
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.authtoken.models import Token
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import UserSerializer, GroupSerializer, CategoriaSerializer, FormaPagamentoSerializer, PedidoSerializer, PedidoSimpleSerializer, ProdutoSerializer, FornecedorSerializer
-from .models import  Forma_Pagamento, Pedido, Produto, Fornecedor, Categoria
+from .serializers import UserSerializer, GroupSerializer, CategoriaSerializer, FormaPagamentoSerializer, ProdutoPedidoCompleteSerializer, PedidoSerializer, PedidoSimpleSerializer, ProdutoSerializer, FornecedorSerializer
+from .models import Forma_Pagamento, Pedido, Produto, Fornecedor, Categoria, Produto_Pedido
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 User = get_user_model()
-
-from django.contrib.auth import authenticate
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from rest_framework.status import (
-    HTTP_400_BAD_REQUEST,
-    HTTP_404_NOT_FOUND,
-    HTTP_200_OK
-)
-from rest_framework.response import Response
 
 
 @csrf_exempt
@@ -42,12 +40,13 @@ def login(request):
     return Response({'token': token.key},
                     status=HTTP_200_OK)
 
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer 
+    serializer_class = UserSerializer
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated, ]
 
@@ -60,6 +59,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated, ]
+
 
 class FormaPagamentoViewSet(viewsets.ModelViewSet):
     serializer_class = FormaPagamentoSerializer
@@ -85,6 +85,7 @@ class ProdutoViewSet(viewsets.ModelViewSet):
     queryset = Produto.objects.all()
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated, ]
+
     def post(self, request, *args, **kwargs):
         serializer = ProdutoSerializer(data=request.data)
         if serializer.is_valid():
@@ -92,7 +93,6 @@ class ProdutoViewSet(viewsets.ModelViewSet):
             serializer = ProdutoSerializer(produto)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
 
 
 class FornecedorViewSet(viewsets.ModelViewSet):
@@ -105,5 +105,12 @@ class FornecedorViewSet(viewsets.ModelViewSet):
 class CategoriaViewSet(viewsets.ModelViewSet):
     serializer_class = CategoriaSerializer
     queryset = Categoria.objects.all()
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated, ]
+
+
+class ProdutoPedidoViewSet(viewsets.ModelViewSet):
+    serializer_class = ProdutoPedidoCompleteSerializer
+    queryset = Produto_Pedido.objects.all()
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated, ]

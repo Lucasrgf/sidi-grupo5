@@ -9,4 +9,6 @@ export class ProdutoModel {
     ativo: string;
     categoria: CategoriaModel;
     fornecedor: FornecedorModel;
+    qtd: number;
+    valorParcial: number;
 }

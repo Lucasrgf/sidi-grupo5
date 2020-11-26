@@ -11,7 +11,7 @@ export class VendedorService {
 
   baseUrl = 'http://localhost:8000/';
 
-  constructor(private http: HttpClient, public loginService: AuthService) {
+  constructor(private http: HttpClient) {
    
   }
 

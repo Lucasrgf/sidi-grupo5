@@ -9,7 +9,6 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #accountMenu>
-    <button mat-menu-item (click)="login()">Login</button>
     <button mat-menu-item (click)="logout()">Sair</button>
   </mat-menu>
 </mat-toolbar>
@@ -17,6 +16,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" [(opened)]="opened">
     <mat-nav-list>
+      <a mat-list-item href="/vendas">Vendas</a>
       <a mat-list-item href="/vendedor">Vendedor</a>
       <a mat-list-item href="/produto">Produto</a>
       <a mat-list-item href="/fornecedor">Fornecedor</a>

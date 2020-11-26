@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework.authtoken import views
-from core.views import UserViewSet, GroupViewSet, CategoriaViewSet, FormaPagamentoViewSet, PedidoViewSet, ProdutoViewSet, FornecedorViewSet, login
+from core.views import UserViewSet, GroupViewSet, CategoriaViewSet, FormaPagamentoViewSet, PedidoViewSet, ProdutoViewSet, FornecedorViewSet, login, ProdutoPedidoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'vendedores', UserViewSet)
@@ -26,6 +26,8 @@ router.register(r'pedidos', PedidoViewSet)
 router.register(r'produtos', ProdutoViewSet)
 router.register(r'fornecedores', FornecedorViewSet)
 router.register(r'categorias', CategoriaViewSet)
+router.register(r'produto-pedido', ProdutoPedidoViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

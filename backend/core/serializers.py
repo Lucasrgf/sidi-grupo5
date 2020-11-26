@@ -16,6 +16,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             user.save()
             return user
 
+class UserSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'groups', 'id']
 
 class FornecedorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,7 +42,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class FormaPagamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Forma_Pagamento
-        fields = ['tipo', 'descricao']
+        fields = ['tipo', 'descricao', 'id']
 
 
 class ProdutoSerializer(serializers.ModelSerializer):
@@ -49,24 +53,24 @@ class ProdutoSerializer(serializers.ModelSerializer):
 
 
 class ProdutoPedidoSerializer(serializers.ModelSerializer):
-    produto = ProdutoSerializer()
-
     class Meta:
         model = Produto_Pedido
-        fields = ['produto', 'qtd_produto', 'valor_parcial']
+        fields = ['produto', 'qtd_produto', 'valor_parcial', 'id']
+
+class ProdutoPedidoCompleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Produto_Pedido
+        fields = ['produto', 'qtd_produto', 'valor_parcial', 'pedido', 'id']
 
 
 class PedidoSimpleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
-        fields = ['id', 'valor', 'data', 'status']
+        fields = ['id', 'valor', 'data', 'status', 'vendedor', 'forma_pagamento']
 
 
 class PedidoSerializer(serializers.ModelSerializer):
-    forma_pagamento = FormaPagamentoSerializer()
-    vendedor = UserSerializer()
-    pedido = ProdutoPedidoSerializer(many=True)
-
+    pedido = ProdutoPedidoSerializer(many=True, read_only=True)
     class Meta:
         model = Pedido
         fields = ['id', 'valor', 'data', 'status',
