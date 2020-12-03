@@ -42,7 +42,7 @@ export class PedidosDetailComponent implements OnInit {
         this.isUpdate = false;
         this.pedido.valor = 'R$ 0,00';
         let storage = localStorage.getItem('vendedor');
-        this.pedido.vendedor = JSON.parse(storage);
+        this.pedido.vendedor_model = JSON.parse(storage);
       } else {
         this.isUpdate = true;
         this.loadPedido(+id);
